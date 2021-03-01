@@ -21,6 +21,12 @@ const Home = () => {
     const secondClick = (name,e) =>{
         console.log("Hello "+name,e.target);
     }
+
+    const handleDelete = (id) =>{
+        const newBlogs = blogs.filter(blog => blog.id !== id);
+        setBlogs(newBlogs);
+    }
+
     return (
         <div className="home">
             {/* <h2>Homepage</h2>
@@ -32,7 +38,8 @@ const Home = () => {
 
             {/* We need to always put a key property as it allows react to keep track of data */}
             {/* Props is way to pass data from one component ( Parent to Child) component */}
-            <BlogList blogs={blogs} title="All Blogs!"/>
+            <BlogList blogs={blogs} title="All Blogs!" handleDelete={handleDelete} />
+            <BlogList blogs={blogs.filter((blog)=>blog.author === 'mario')} title="Mario's Blogs!!" handleDelete={handleDelete} />
         </div>
       );
 }
