@@ -1,5 +1,6 @@
-import {useState } from 'react';
-import BlogList from './BlogList'
+import {useState, useEffect } from 'react';
+import BlogList from './BlogList';
+import SampleBlogs from './SampleBlogs';
 
 const Home = () => {
 
@@ -11,9 +12,7 @@ const Home = () => {
         { title: 'Web dev top tips', body: 'lorem ipsum...', author: 'mario', id: 3 }
     ])
  
-    const handleClick = (e) => {
-        // console.log("Hello Guys");
-        // console.log(e)        
+    const handleClick = (e) => {             
         setName('Siddu');
         setAge(30);
     }
@@ -27,6 +26,10 @@ const Home = () => {
         setBlogs(newBlogs);
     }
 
+    useEffect(() => {
+        console.log('use effect ran');
+    })
+
     return (
         <div className="home">
             {/* <h2>Homepage</h2>
@@ -39,7 +42,7 @@ const Home = () => {
             {/* We need to always put a key property as it allows react to keep track of data */}
             {/* Props is way to pass data from one component ( Parent to Child) component */}
             <BlogList blogs={blogs} title="All Blogs!" handleDelete={handleDelete} />
-            <BlogList blogs={blogs.filter((blog)=>blog.author === 'mario')} title="Mario's Blogs!!" handleDelete={handleDelete} />
+            <BlogList blogs={blogs.filter((blog)=>blog.author === 'mario')} title="Mario's Blogs!!" handleDelete={handleDelete} />            
         </div>
       );
 }

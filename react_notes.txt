@@ -1,0 +1,7 @@
+useEffect Hook
+
+This hook runs a function for eery render of the hook.
+When the state changes, react re-renders the DOM
+
+useEffect is a hook that helps with running a code with every render.
+
