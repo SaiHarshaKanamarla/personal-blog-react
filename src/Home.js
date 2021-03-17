@@ -6,7 +6,8 @@ const Home = () => {
     const [name, setName] = useState('harsha'); //useState hook
     const [age, setAge] = useState(25)
     const [blogs,setBlogs] = useState(null);
-    const [isPending, setisPending] = useState(true)
+    const [isPending, setisPending] = useState(true);
+    const [error, setError] = useState(null);
 ;    
     const [nameo,setNameo] = useState('harsha');
     const handleClick = (e) => {             
@@ -29,15 +30,25 @@ const Home = () => {
         // Beware of changing the state inside a useEffect. This is cause a cascading loop
         fetch('http://localhost:8000/blogs')
             .then((res)=>{
+                console.log(res);
+                if(!res.ok){
+                    // response is not okay. SO we throw an error.
+                    throw Error('Could not fetch data from the resource'); // When we throw this error, it is caught in the .catch block
+                }
                 return res.json();
             })
             .then((data)=>{
                 console.log(data);
                 setBlogs(data);
+                setError(null);
                 setisPending(false);
             })
+            .catch((err)=>{
+                setisPending(false);
+                setError(err.message);
+            })
     },[]); // The [] denotes depenedencies for useEffect(). If it's empty, it only runs useEffect just once(ie the initial render). If the state changes later, it won't run it again
-    // the [] brackets are used to name the dependencies for the useEffect(). So basically, the useEffect looks for changes in the state of nameo. If the nameo changes, then useEffect is invoked.
+    // the [] brackets are used to name the dependencies for the useEffect(). So basically, the useEffect looks for changes in the state of name. If the name changes, then useEffect is invoked.
     return (
         <div className="home">
             {/* <h2>Homepage</h2>
@@ -49,6 +60,7 @@ const Home = () => {
 
             {/* We need to always put a key property as it allows react to keep track of data */}
             {/* Props is way to pass data from one component ( Parent to Child) component */}
+            {error && <div>{error}</div>}
             {isPending && <div>Loading...</div>}
             {blogs && <BlogList blogs={blogs} title="All Blogs!"/>}
             {/* <BlogList blogs={blogs.filter((blog)=>blog.author === 'mario')} title="Mario's Blogs!!" handleDelete={handleDelete} />             */}
