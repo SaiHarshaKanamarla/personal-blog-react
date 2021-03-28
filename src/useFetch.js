@@ -9,7 +9,10 @@ const useFetch = (url) => { // custom hooks need to start with 'use' keyword. El
         // This is a way to run code for every render(gets fired on every render). We dont store it in a constatnt cuz it does not return anything
         // We can do tasks like fetching data or authenticating services.
         // Beware of changing the state inside a useEffect. This is cause a cascading loop
-        fetch(url)
+        const abortCont = new AbortController();
+
+
+        fetch(url,{signal: abortCont.signal})
             .then((res)=>{
                 console.log(res);
                 if(!res.ok){
@@ -25,10 +28,17 @@ const useFetch = (url) => { // custom hooks need to start with 'use' keyword. El
                 setisPending(false);
             })
             .catch((err)=>{
-                setisPending(false);
+                if(err.name === "AbortError"){
+                    console.log("Fetch aborted");
+                }else{
+                    setisPending(false);
                 setError(err.message);
-            })
-    },[]);
+                }
+                
+            });
+
+            return () => abortCont.abort();
+    },[url]);
 
     return {data, isPending, error}
 }
