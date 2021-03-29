@@ -2,6 +2,7 @@ import Navbar from './Navbar';
 import Home from './Home';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import Create from './Create';
+import BlogDetails from './BlogDetails';
 // The function name must always start with a capital letter.
 function App() {
   // const title = "Harsha's Personal Blog";
@@ -37,6 +38,9 @@ function App() {
             </Route>
             <Route path='/create'>
               <Create />
+            </Route>
+            <Route path='/blogs/:id'>
+              <BlogDetails />
             </Route>
           </Switch>
         </div>
