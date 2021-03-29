@@ -71,4 +71,4 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 ### A Blog App which shows the users the list of all their blogs
 
-Developed using React.js. Yet to be deployed. Stay tuned for updates
+Developed using React.js. Yet to be deployed.
