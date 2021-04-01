@@ -71,4 +71,8 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 ### A Blog App which shows the users the list of all their blogs
 
-Developed using React.js. Yet to be deployed.
+Developed using React.js. You can clone the repo and run 'npm install' to setup the workspace with all dependencies set. For app to run as expected, you need to run json-server in a separate terminal as follows
+
+json-server --watch /data/db.json --port 8000
+
+This will create a mock REST API which is consumed by the application using Hooks. We can leverage GET, POST, UPDATE and DELETE operations on the provided endpoint
