@@ -5,7 +5,7 @@ const Navbar = () => {
     return ( 
         <nav className="navbar">
             <Link to="/">
-                <h1>Harsha's Blog</h1>
+                <h1>BloGit</h1>
             </Link>
             <div className="links"> 
 {/*                 // If we use anchor tags, the react still makes the request to the endpoint for data. Instead we can use the Link package so that react router can handle the request in the browser rather than making a request to the server
